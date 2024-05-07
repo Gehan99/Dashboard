@@ -60,11 +60,15 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
+                <a href="#" class="logout"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </a>
+            </li>
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -89,9 +93,10 @@
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>
-			<a href="#" class="profile">
-				<img src="{{ asset('img/people.png') }}">
-			</a>
+			<div>{{ Auth::user()->name }}</div>
+            <a href="{{ route('profile.edit') }}" class="profile" @click.prevent="open = !open">
+                <img src="{{ asset('img/people.png') }}">
+            </a>
 		</nav>
 		<!-- NAVBAR -->
 
